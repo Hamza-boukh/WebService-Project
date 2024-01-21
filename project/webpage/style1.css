@@ -1,0 +1,28 @@
+.rightside , .leftside{
+      height: 100vh;
+      width: 100%;
+}
+
+.leftside{
+    background-color:bisque ;
+    opacity: 0.68;
+}
+
+.rightside{
+    background-color:beige;
+    opacity: 0.68;
+}
+
+.transparent-div {
+    height: 90vh;
+    width: 90%;
+    background-color:beige;
+    border: 2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 50px;
+    padding: 50px;
+    box-sizing: border-box;
+    margin-left: 70px;
+    opacity: 0.72;
+}
+
+

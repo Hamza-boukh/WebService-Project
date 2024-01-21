@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<html>
+<head>  
+<link rel="stylesheet" href="style1.css">
+<title> UniSearch </title>
+<link rel="shortcut icon" type="image/png" href="logo.png"/>
+</head>
+<body style="background-image: url('uni.jpg');
+    height: 500px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+
+
+
+    <div class="transparent-div">
+        <form onsubmit="event.preventDefault(); getUniversities();">
+            <label for="stateName">Enter State Name:</label>
+            <input type="text" id="stateName" required>
+    
+            <label for="status">Filter by Status:</label>
+            <select id="status">
+                <option value="">All</option>
+                <option value="private">private</option>
+                <option value="public">public</option>
+            </select>
+    
+            <label for="specialty">Filter by Specialty:</label>
+            <select id="specialty">
+                <option value="">All</option>
+                <option value="Business">Business</option>
+                <option value="Science">Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Medecine">Medecine</option>
+                <option value="letter">lettre</option>
+                
+                <!-- Add more options as needed -->
+            </select>
+    
+            <label for="degree">Filter by Degree:</label>
+            <select id="degree">
+                <option value="">All</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Master">Master</option>
+                <option value="Licence">Licence</option>
+                <option value="Doctorat">Doctorat</option>
+                <option value="Prepa">Prepa</option>
+                <option value="Diplomat">Diplomat</option>
+                
+                <!-- Add more options as needed -->
+            </select>
+    
+            <button type="submit">Search</button>
+        </form>
+    
+        <div id="resultContainer"></div>
+    </div>
+
+
+
+
+
+
+
+ 
+<footer class="footer" style="font-weight: bold;
+    position: absolute;
+    bottom:0; 
+    background-color:black;
+    left:0px;
+    margin-top: 1000xp;
+    padding-left:470.5px;
+    padding-right:642px;
+    opacity:0.8;">
+                  <p style="color:lightgrey;
+                  font-size:18px;"> Made by Hamza Boukhatem senior BA/IT at TBS </p>
+
+</footer>
+
+
+
+
+<script>
+  async function getUniversities() {
+      // Get the state name from the input field
+      const stateName = document.getElementById('stateName').value;
+      const status = document.getElementById('status').value;
+      const specialty = document.getElementById('specialty').value;
+      const degree = document.getElementById('degree').value;
+
+      const url = `http://127.0.0.1:5000/states/${stateName}/universities?status=${status}&specialty=${specialty}&degree=${degree}`;
+
+      // Fetch universities for the given state
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      if (response.ok) {
+          const universities = await response.json();
+          displayUniversities(universities);
+      } else {
+          const result = await response.json();
+          alert('Failed to get universities: ' + result.error);
+      }
+  }
+
+  function displayUniversities(universities) {
+      // Check if the resultContainer exists
+      const resultContainer = document.getElementById('resultContainer');
+      if (!resultContainer) {
+          console.error("Result container not found");
+          return;
+      }
+
+      // Clear previous results
+      resultContainer.innerHTML = '';
+
+      // Display universities in the result container
+      universities.forEach(uni => {
+          const universityDiv = document.createElement('div');
+          universityDiv.classList.add('university-item');
+          universityDiv.innerHTML = `
+              <h2>${uni.name}</h2>
+              <p><strong>Status:</strong> ${uni.status}</p>
+              <p><strong>Description:</strong> ${uni.description}</p>
+              <p><strong>Location:</strong> ${uni.location}</p>
+              <p><strong>Tuition Fee:</strong> ${uni.tuition_fee} TND</p>
+              <p><strong>Specialty:</strong> ${uni.specialty}</p>
+              <p><strong>Degree:</strong> ${uni.degree}</p>
+              <p><strong>Student Capacity:</strong> ${uni.student_capacity}</p>
+              <p><strong>Last Year Score:</strong> ${uni.last_year_score}</p>
+              
+          `;
+          
+          resultContainer.appendChild(universityDiv);
+          
+      });
+      resultContainer.style.overflowY = 'auto';
+      resultContainer.style.maxHeight = '500px'; // Set a max height for better appearance
+  }
+</script>
+<style>
+  .university-item {
+    border-bottom: 2px solid #333; /* Increase the thickness and change color */
+    padding-bottom: 15px; /* Adjust the spacing between universities */
+    margin-bottom: 15px; /* Adjust the spacing between universities */
+  }
+</style>
+
+</body>
+</html>

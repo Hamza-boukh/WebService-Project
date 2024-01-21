@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<html>
+<head> 
+<link rel="stylesheet" href="style1.css"> 
+<title> UniSearch </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="shortcut icon" type="image/png" href="logo.png"/>
+</head>
+<body style="background-image: url('uni.jpg');
+    height: 500px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+
+     <div class="row">
+            <div class="col">
+                 <div class="leftside">
+                    <form id="gradesForm">
+                        <br><br><br>
+                        <h1 style="margin-left: 130px; color: black;" >Calculate your score</h1>
+                        <label for="math" style="margin-left: 20px;color: black;">Math:</label>
+                        <input type="number" step="0.25" id="math" name="math" style="margin-left: 158px;" required><br>
+                    
+                        <label for="SVT" style="margin-left: 20px;color: black;">SVT (Science and Life):</label>
+                        <input type="number" step="0.25" id="SVT" name="SVT" style="margin-left: 40px;" required><br>
+                    
+                        <label for="physics" style="margin-left: 20px;color: black;">Physics:</label>
+                        <input type="number" step="0.25" id="physics" name="physics"  style="margin-left: 144px;" required><br>
+                    
+                        <label for="computerScience" style="margin-left: 20px;color: black;">Computer Science:</label>
+                        <input type="number" step="0.25" id="computerScience" name="computerScience" style="margin-left: 66px;" required><br>
+                    
+                        <label for="french"style="margin-left: 20px;color: black;">French:</label>
+                        <input type="number" step="0.25" id="french" name="french" style="margin-left: 148px;" required><br>
+                    
+                        <label for="english" style="margin-left: 20px;color: black;">English:</label>
+                        <input type="number" step="0.25" id="english" name="english" style="margin-left: 145px;" required><br>
+                    
+                        <label for="arabic" style="margin-left: 20px;color: black;">Arabic:</label>
+                        <input type="number" step="0.25" id="arabic" name="arabic" style="margin-left: 150px;" required><br>
+                    
+                        <label for="philosophy" style="margin-left: 20px;color: black;">Philosophy:</label>
+                        <input type="number" step="0.25" id="philosophy" name="philosophy" style="margin-left: 116px;" required><br>
+                    
+                        <label for="histGeo" style="margin-left: 20px;color: black;">History/Geography:</label>
+                        <input type="number" step="0.25" id="histGeo" name="histGeo" style="margin-left: 60px;" required><br>
+                    
+                        <label for="economy" style="margin-left: 20px;color: black;">Economy:</label>
+                        <input type="number" step="0.25" id="economy" name="economy" style="margin-left: 130px;" required><br>
+                    
+                        <label for="gestion" style="margin-left: 20px;color: black;">Management (Gestion):</label>
+                        <input type="number" step="0.25" id="gestion" name="gestion" style="margin-left: 30px;" required><br>
+                    
+                        <label for="technology" style="margin-left: 20px;color: black;">Technology:</label>
+                        <input type="number" step="0.25" id="technology" name="technology" style="margin-left: 110px;" required><br>
+                    
+                        <label for="sports" style="margin-left: 20px;color: black;">Sports:</label>
+                        <input type="number" step="0.25" id="sports" name="sports" style="margin-left: 145px;" required><br>
+                    
+                        <button type="button" class="btn btn-secondary" style="margin-left: 280px; color: rgb(249, 247, 246);" onclick="submitGrades()">Submit</button>
+                    </form>
+                 </div>
+            </div>
+
+            <div class="col">
+                  <div class="rightside">
+                    <br><br><br><br><br><br><br><br><br>
+                        <h1 style="margin-left: 240px;color: black;">Get your results</h1><br><br>
+                        <div id="result-box" style="margin-left: 340px;"></div>
+                        <br><br>
+                        <button type="button" class="btn btn-secondary" style="margin-left: 350px;width: 120px;height: 50px;color: rgb(255, 253, 253);" onclick="getNEgrade()">Result</button>
+                        <br><br><br><br><br>
+                        <a href="./Choice.html">
+                        <button type="button" class="btn btn-secondary" style="margin-left: 600px;width: 120px;height: 40px;color: rgb(255, 255, 255);" >Explore</button>
+                        </a>
+                  </div>
+            </div>
+
+
+
+
+
+     </div>
+ 
+
+ 
+
+</div> 
+<footer class="footer" style="font-weight: bold;
+    position: absolute;
+    bottom:0; 
+    background-color:black;
+    left:0px;
+    margin-top: 1000xp;
+    padding-left:470.5px;
+    padding-right:642px;
+    opacity:0.8;">
+                  <p style="color:lightgrey;
+                  font-size:18px;"> Made by Hamza Boukhatem senior BA/IT at TBS </p>
+
+</footer>
+
+<script>
+// Extract the username from the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+// Function to add subjects
+async function submitGrades() {
+    // Gather data from input fields
+    const math = parseFloat(document.getElementById('math').value) || 0.0;
+    const science = parseFloat(document.getElementById('SVT').value) || 0.0;
+    const physics = parseFloat(document.getElementById('physics').value) || 0.0;
+    const computer_science = parseFloat(document.getElementById('computerScience').value) || 0.0;
+    const french = parseFloat(document.getElementById('french').value) || 0.0;
+    const english = parseFloat(document.getElementById('english').value) || 0.0;
+    const arabic = parseFloat(document.getElementById('arabic').value) || 0.0;
+    const philosophy = parseFloat(document.getElementById('philosophy').value) || 0.0;
+    const hist_geo = parseFloat(document.getElementById('histGeo').value) || 0.0;
+    const economy = parseFloat(document.getElementById('economy').value) || 0.0;
+    const gestion = parseFloat(document.getElementById('gestion').value) || 0.0;
+    const technology = parseFloat(document.getElementById('technology').value) || 0.0;
+    const sport = parseFloat(document.getElementById('sports').value) || 0.0;
+
+    // Send a POST request to Flask route
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/users/${username}/subjects`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                math: math,
+                science: science,
+                physics: physics,
+                computer_science: computer_science,
+                french: french,
+                english: english,
+                arabic: arabic,
+                philosophy: philosophy,
+                hist_geo: hist_geo,
+                economy: economy,
+                gestion: gestion,
+                technology: technology,
+                sport: sport,
+            }),
+        });
+
+        console.log(response);
+
+        if (response.ok) {
+            const result = await response.json();
+            alert('Score has been computed. Click on the button to the right to get the results');
+        } else {
+            const result = await response.json();
+            alert('Failed to add subjects: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+async function getNEgrade() {
+    const response = await fetch(`http://127.0.0.1:5000/users/${username}/NEgrade`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        document.getElementById('result-box').innerText = `Your NEgrade: ${result.NEgrade}`;
+    } else {
+        alert('Failed to get NEgrade: ' + response.statusText);
+    }
+}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<html>
+<head>  
+<title> UniSearch </title>
+<link rel="shortcut icon" type="image/png" href="logo.png"/>
+</head>
+<body style="background-image: url('uni.jpg');
+    height: 500px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+
+<div id="div1" style=" border-style: solid white;
+padding-top:20px;
+padding-left:50px;
+padding-right:60px;
+padding-bottom: 28px;
+border-radius: 20px; 
+margin-right: 20px;
+background-color: white;
+max-width: 280px;
+margin: auto; 
+opacity: 0.8;
+position: absolute;
+top:100px;
+left:500px">
+<img src="logo.png" style=" position:absolute;
+top:2px; 
+padding-left:100px;
+padding-top: 10px;"width="70px" /> <br>
+<h1></h1>   
+<h1 style="padding-top: 30px;"> Log In to your account </h1>  
+
+<form >  
+    <input type="text" id="username" name="username" class="form-control" style="padding:4px 10px;" placeholder="username" size="30px" required> <br>
+    <br>
+    <input type="password" id="password" name="password" class="form-control" style="padding:4px 10px;" placeholder="password" size="30px" required>  <br>
+    <button type="button"  style="
+        background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+        border: 0;
+        border-radius: 12px;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 2.5;
+        outline: transparent;
+        padding: 0 1rem;
+        text-align: center;
+        margin-left:90px;
+        text-decoration: none;
+        transition: box-shadow .2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        " onclick="loginUser()"> Log in  </button> <br> <br>
+<class style="font-size: 14px"> Not registered yet? <a href="signup.html">Sign Up</a> </class>
+</form>  
+
+</div> 
+<footer class="footer" style="font-weight: bold;
+    position: absolute;
+    bottom:0; 
+    background-color:black;
+    left:0px;
+    padding-left:470.5px;
+    padding-right:642px;
+    opacity:0.8;">
+                  <p style="color:lightgrey;
+                  font-size:18px;"> Made by Hamza Boukhatem senior BA/IT at TBS </p>
+
+</footer>
+
+<script>
+    async function loginUser() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  const response = await fetch('http://127.0.0.1:5000/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password
+    })
+  });
+
+  const result = await response.json();
+
+  if (response.ok) {
+    alert('Login successful');
+    // Redirect to another page
+    window.location.href = './Score.html?username=' + encodeURIComponent(username);
+  } else {
+    alert('Login failed: ' + result.error);
+    // Refresh the page on incorrect password
+    location.reload();
+  }
+}
+  </script>
+         
+</body> 
+</html>
